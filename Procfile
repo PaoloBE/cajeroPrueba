@@ -1,1 +1,1 @@
-web: java -war target/controlCajero-0.0.1-SNAPSHOT.war
+web: java -jar target/controlCajero-0.0.1-SNAPSHOT.jar

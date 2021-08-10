@@ -1,22 +1,27 @@
 $( document ).ready(function() {
-	
-	cajeros.forEach(el => {
-		var e = (el.tipoE=='a')? '<a class="btn btn-warning" >Activo</a>' : '<a class="btn btn-light disabled" >Inactivo</a>'
-		var n = (el.tipoN=='a')? '<a class="btn btn-success" >Activo</a></td>' : '<a class="btn btn-light disabled">Inactivo</a></td>'
-		var ap = (el.tipoAP=='a')? '<a class="btn btn-info" >Activo</a></td>' : '<a class="btn btn-light disabled">Inactivo</a></td>'
-		$('#cajerosTbl tbody').append('<tr><td>'+el.id+'</td><td>'+el.nom+'</td>'+
-				'<td onclick="estadoE('+el.id+')" id='+el.id+'BtnE>'+e+'</td>'+
-				'<td onclick="estadoN('+el.id+')" id='+el.id+'BtnN>'+n+'</td>'+
-				'<td onclick="estadoAP('+el.id+')" id='+el.id+'BtnAP>'+ap+'</td></tr>'
-		)
+	$.get('https://cajero-back.herokuapp.com/main/cajeros',function(data){
+		cajeros = data
+		data.forEach(el => {
+			var e = (el.tipoE=='a')? '<a class="btn btn-warning" >Activo</a>' : '<a class="btn btn-light disabled" >Inactivo</a>'
+			var n = (el.tipoN=='a')? '<a class="btn btn-success" >Activo</a></td>' : '<a class="btn btn-light disabled">Inactivo</a></td>'
+			var ap = (el.tipoAP=='a')? '<a class="btn btn-info" >Activo</a></td>' : '<a class="btn btn-light disabled">Inactivo</a></td>'
+			$('#cajerosTbl tbody').append('<tr><td>'+el.id+'</td><td>'+el.nom+'</td>'+
+					'<td onclick="estadoE('+el.id+')" id='+el.id+'BtnE>'+e+'</td>'+
+					'<td onclick="estadoN('+el.id+')" id='+el.id+'BtnN>'+n+'</td>'+
+					'<td onclick="estadoAP('+el.id+')" id='+el.id+'BtnAP>'+ap+'</td></tr>'
+			)
+		})
+		
 	})
+	
 	
 	function asigF(){
 		console.log('asig')
 	}
 });
 var timer = 15000
-var cajeros = [
+/*
+ var cajeros =	[
 	{ id:1, nom:"Susan E.", tipoE:"i" , tipoN:"i", tipoAP:"a"	 ,cola:[]},
 	{ id:2, nom:"Lizbet F.", tipoE:"i" , tipoN:"a", tipoAP:"i"	 ,cola:[]},
 	{ id:3, nom:"Michael G.", tipoE:"i" , tipoN:"a", tipoAP:"i"  ,cola:[]},
@@ -26,6 +31,9 @@ var cajeros = [
 	{ id:7, nom:"Jean K.", tipoE:"i" , tipoN:"i", tipoAP:"i"	 ,cola:[]},
 	{ id:8, nom:"Lucas L.", tipoE:"i" , tipoN:"i", tipoAP:"i"	 ,cola:[]}
 	]
+ */
+
+var cajeros
 var clientes = []
 
 function estadoE(a){
